@@ -21,13 +21,13 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(
-//   session({
-//     resave: false,
-//     saveUninitialized: true,
-//     secret: "bla bla bla"
-//   })
-// );
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: true,
+    secret: "bla bla bla"
+  })
+);
 require("./routes/authRoutes")(app);
 
 const PORT = process.env.PORT || 8000;
