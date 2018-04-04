@@ -17,17 +17,20 @@ app.use(
     keys: [keys.cookieKey]
   })
 );
+app.use(
+  session({ secret: "keyboard cat", key: "sid", cookie: { secure: true } })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: true,
-    secret: "bla bla bla"
-  })
-);
+// app.use(
+//   session({
+//     resave: false,
+//     saveUninitialized: true,
+//     secret: "bla bla bla"
+//   })
+// );
 require("./routes/authRoutes")(app);
 
 const PORT = process.env.PORT || 8000;
