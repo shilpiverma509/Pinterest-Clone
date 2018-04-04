@@ -21,19 +21,16 @@ passport.use(
       includeEmail: true,
       callbackURL: "/auth/twitter/callback"
     },
-    (token, tokenSecret, profile, done) => {
-      User.findOne({
+    async (token, tokenSecret, profile, done) => {
+      const existingUser = await User.findOne({
         twitterID: profile.id
-      }).then(existingUser => {
-        if (existingUser) {
-          //we already have a user with this twitter ID
-          done(null, existingUser);
-        } else {
-          new User({ twitterID: profile.id }).save().then(user => {
-            done(null, user);
-          });
-        }
       });
+      if (existingUser) {
+        //we already have a user with this twitter ID
+        return done(null, existingUser);
+      }
+      const user = await new User({ twitterID: profile.id }).save();
+      done(null, user);
     }
   )
 );

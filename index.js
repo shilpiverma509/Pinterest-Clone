@@ -3,9 +3,9 @@ const session = require("express-session");
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
-const keys = require("./server/config/keys");
-require("./server/models/User");
-require("./server/services/passport");
+const keys = require("./config/keys");
+require("./models/User");
+require("./services/passport");
 //require('./routes/authRoutes');
 
 mongoose.connect(keys.mongooseURI);
@@ -28,7 +28,7 @@ app.use(passport.session());
 //     secret: "bla bla bla"
 //   })
 // );
-require("./server/routes/authRoutes")(app);
+require("./routes/authRoutes")(app);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT);

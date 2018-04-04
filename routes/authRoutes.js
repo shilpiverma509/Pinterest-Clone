@@ -4,12 +4,15 @@ module.exports = app => {
   //route-handlers
   app.get("/auth/twitter", passport.authenticate("twitter"));
 
-  app.get("/auth/twitter/callback", passport.authenticate("twitter"));
+  app.get("/auth/twitter/callback", passport.authenticate("twitter")),
+    (req, res) => {
+      res.redirect("/pins");
+    };
 
   //logout route handler
   app.get("/api/logout", (req, res) => {
     req.logout();
-    res.send(req.user);
+    res.redirect("/");
   });
 
   //authenticated user's data
