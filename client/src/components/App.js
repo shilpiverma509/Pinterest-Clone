@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Header from "./Header";
 import Dashboard from "./Dashboard";
 import Landing from "./Landing";
-import NewPin from "./NewPin";
+import BoardNew from "./boards/BoardNew";
 import * as actions from "../actions";
 import { connect } from "react-redux";
 
@@ -11,15 +11,16 @@ class App extends React.Component {
   componentDidMount() {
     this.props.fetchUser();
   }
+
   render() {
     return (
       <div className="container">
         <BrowserRouter>
-          <div>
+          <div className="container">
             <Header />
             <Route path="/" component={Landing} exact />
             <Route path="/pins" component={Dashboard} exact />
-            <Route path="/pins/new" component={NewPin} />
+            <Route path="/boards/new" component={BoardNew} />
           </div>
         </BrowserRouter>
       </div>

@@ -10,7 +10,7 @@ class Header extends React.Component {
       case false:
         return (
           <li>
-            <a href="/auth/twitter">Login with Google</a>
+            <a href="/auth/twitter">Login with Twitter</a>
           </li>
         );
       default:

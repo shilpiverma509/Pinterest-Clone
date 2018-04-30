@@ -6,6 +6,8 @@ const passport = require("passport");
 const keys = require("./config/keys");
 require("./models/User");
 require("./services/passport");
+require("./models/Boards");
+require("./models/pins");
 //require('./routes/authRoutes');
 
 mongoose.connect(keys.mongooseURI);
@@ -18,7 +20,13 @@ app.use(
   })
 );
 app.use(
-  session({ secret: "keyboard cat", key: "sid", cookie: { secure: true } })
+  session({
+    secret: "keyboard cat",
+    key: "sid",
+    resave: true,
+    saveUninitialized: true,
+    cookie: { secure: true }
+  })
 );
 
 app.use(passport.initialize());
@@ -32,6 +40,7 @@ app.use(passport.session());
 //   })
 // );
 require("./routes/authRoutes")(app);
+require("./routes/boardRoutes")(app);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT);
